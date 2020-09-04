@@ -1,0 +1,19 @@
+{
+  "name": "nodegitlog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tests"
+  },
+  "keywords": [
+    "gitlog",
+    "git",
+    "log"
+  ],
+  "author": "Martino Vallara",
+  "license": "ISC",
+  "dependencies": {
+    "gitlog": "^4.0.0"
+  }
+}
