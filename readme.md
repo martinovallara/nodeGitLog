@@ -4,7 +4,10 @@ Utility to generate the Id list of cards present in the commit Messages from a g
 
 Assumption:
 
-The card ID must be present in the commit message in this form: [ID]
+The card ID must be present in the commit message in this form: ```[ID]: ex [1321] ```
+
+*a series of numeric characters enclosed in square brackets*
+
 
 usage:
     node index.js \<path-of-git-repo\> PH 2020-01-01"
