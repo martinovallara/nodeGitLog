@@ -10,16 +10,16 @@ const options = {
 if (process.argv.length <= 2) {
     console.log("try: \nnode index.js <path-of-git-repo> PH 2020-01-01\n");
     console.log("for extract card Id in commit message after '2020-01-01' with message which contains 'PH' from git repository in <path-of-git-repo>\n");
-    
+
     process.exit();
 }
-console.log(process.argv);
+//console.log(process.argv);
 
 options.repo = process.argv[2];
 options.after = process.argv[4];
 
 
-console.log(options);
+//console.log(options);
 // Synchronous
 const commits = gitlog(options);
 const messageFilter = process.argv[3];
@@ -41,4 +41,6 @@ phCommits.reduce((cardIdList, commit) => {
 
 console.log("\nFounded " + cardIdDistinct.length + " cardId.\n")
 console.log(cardIdDistinct.sort().join(","));
+
+console.log("\nCopy a past the list in filter box of trello to see the complete list of cards.");
 
