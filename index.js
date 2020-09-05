@@ -4,14 +4,21 @@ const options = {
     repo: "",
     number: 5000,
     fields: ["subject"],
-    after: "2020-07-03",
     execOptions: { maxBuffer: 10000 * 1024 },
 };
 
+if (process.argv.length <= 2) {
+    console.log("try: \nnode index.js ~/Repositories/XPeppers/mercury-development/phoenix-project PH 2020-01-01\n");
+    console.log("for extract card Id in commit message after '2020-01-01' with message which contains 'PH'\n");
+    process.exit();
+}
 console.log(process.argv);
+
 options.repo = process.argv[2];
+options.after = process.argv[4];
 
 
+console.log(options);
 // Synchronous
 const commits = gitlog(options);
 const messageFilter = process.argv[3];
@@ -31,5 +38,6 @@ phCommits.reduce((cardIdList, commit) => {
     //console.log(listCardIds[0]);
 }, cardIdDistinct);
 
-console.log(cardIdDistinct.sort().join(" "));
+console.log("\nFounded " + cardIdDistinct.length + " cardId.\n")
+console.log(cardIdDistinct.sort().join(","));
 
