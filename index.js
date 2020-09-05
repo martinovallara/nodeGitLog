@@ -8,8 +8,9 @@ const options = {
 };
 
 if (process.argv.length <= 2) {
-    console.log("try: \nnode index.js ~/Repositories/XPeppers/mercury-development/phoenix-project PH 2020-01-01\n");
-    console.log("for extract card Id in commit message after '2020-01-01' with message which contains 'PH'\n");
+    console.log("try: \nnode index.js <path-of-git-repo> PH 2020-01-01\n");
+    console.log("for extract card Id in commit message after '2020-01-01' with message which contains 'PH' from git repository in <path-of-git-repo>\n");
+    
     process.exit();
 }
 console.log(process.argv);
