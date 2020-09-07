@@ -9,7 +9,7 @@ The card ID must be present in the commit message in this form: ```[ID]: ex [132
 *a series of numeric characters enclosed in square brackets*
 
 
-usage:
+usage (after git clone):
     node index.js \<path-of-git-repo\> PH 2020-01-01"
     
 for extract card Id in commit message after '2020-01-01' with message which contains 'PH' from git repo in \<path-of-git-repo\>
