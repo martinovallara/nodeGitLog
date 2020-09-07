@@ -13,14 +13,11 @@ if (process.argv.length <= 2) {
 
     process.exit();
 }
-//console.log(process.argv);
 
 options.repo = process.argv[2];
 options.after = process.argv[4];
 
 
-//console.log(options);
-// Synchronous
 const commits = gitlog(options);
 const messageFilter = process.argv[3];
 
@@ -36,7 +33,6 @@ filterdCommits.reduce((cardIdList, commit) => {
         }
     }
     return cardIdList;
-    //console.log(listCardIds[0]);
 }, cardIdDistinct);
 
 console.log("\nFounded " + cardIdDistinct.length + " cardId.\n")
