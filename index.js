@@ -25,9 +25,9 @@ const commits = gitlog(options);
 const messageFilter = process.argv[3];
 
 var cardIdDistinct = [];
-var phCommits = commits.filter(commit => commit.subject.includes(messageFilter));
+var filterdCommits = commits.filter(commit => commit.subject.includes(messageFilter));
 const grepId = /\[(\d*)\]/;
-phCommits.reduce((cardIdList, commit) => {
+filterdCommits.reduce((cardIdList, commit) => {
     const parseId = grepId.exec(commit.subject);
     if (parseId != null) {
         var listCardIds = parseId[1];
@@ -44,3 +44,7 @@ console.log(cardIdDistinct.sort().join(","));
 
 console.log("\nCopy a past the list in filter box of trello to see the complete list of cards.");
 
+console.log("\n===== LIST OF COMMIT WITH CONTAINS '" + messageFilter + "'  ================ \n\n");
+filterdCommits.forEach(c => {
+    console.log(c.subject);
+});
