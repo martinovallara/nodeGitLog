@@ -1,25 +1,33 @@
 const gitlog = require("gitlog").default;
+var argv = require('minimist')(process.argv.slice(2), {stopEarly: true});
+
+console.log(argv);
 
 const options = {
     repo: "",
     number: 5000,
-    fields: ["subject"],
+    fields: ["subject", "hash", "authorDate", "committerDate"],
     execOptions: { maxBuffer: 10000 * 1024 },
 };
 
-if (process.argv.length <= 2) {
+
+/*
+if (argv._.length > 0) {
     console.log("try: \nnode index.js <path-of-git-repo> PH 2020-01-01\n");
     console.log("for extract card Id in commit message after '2020-01-01' with message which contains 'PH' from git repository in <path-of-git-repo>\n");
 
     process.exit();
 }
+*/
+options.repo = argv.repo;
+options.after = argv.after;
 
-options.repo = process.argv[2];
-options.after = process.argv[4];
+console.log(options);
 
 
 const commits = gitlog(options);
-const messageFilter = process.argv[3];
+const messageFilter = argv.messageFilter;
+const hash = argv.hash;
 
 var cardIdDistinct = [];
 var filterdCommits = commits.filter(commit => commit.subject.includes(messageFilter));
@@ -42,5 +50,5 @@ console.log("\nCopy a past the list in filter box of trello to see the complete 
 
 console.log("\n===== LIST OF COMMIT WITH CONTAINS '" + messageFilter + "'  ================ \n\n");
 filterdCommits.forEach(c => {
-    console.log(c.subject);
+    console.log([c.hash,c.authorDate, c.commitDate].join(" "));
 });

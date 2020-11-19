@@ -15,6 +15,7 @@
   "author": "Martino Vallara",
   "license": "ISC",
   "dependencies": {
-    "gitlog": "^4.0.0"
+    "gitlog": "^4.0.0",
+    "minimist": "^1.2.5"
   }
 }
