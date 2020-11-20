@@ -1,5 +1,5 @@
 const gitlog = require("gitlog").default;
-var argv = require('minimist')(process.argv.slice(2), {stopEarly: true});
+var argv = require('minimist')(process.argv.slice(2), { stopEarly: true });
 
 console.log(argv);
 
@@ -7,7 +7,9 @@ const options = {
     repo: "",
     number: 5000,
     fields: ["subject", "hash", "authorDate", "committerDate"],
+    /*
     execOptions: { maxBuffer: 10000 * 1024 },
+    */
 };
 
 
@@ -48,7 +50,22 @@ console.log(cardIdDistinct.sort().join(","));
 
 console.log("\nCopy a past the list in filter box of trello to see the complete list of cards.");
 
+var filesDistinct = [];
+filterdCommits.reduce((filesDistinct, commit) => {
+    console.log(commit.files);
+    committedFiles = commit.files;
+    committedFiles.forEach(f => {
+        if (!filesDistinct.includes(f)) {
+            filesDistinct.push(f);
+        }
+    })
+    return filesDistinct;
+}, filesDistinct);
+
+console.log("\n===== LIST OF COMMITTED FILES: '" + filesDistinct.length + "'  ================ \n\n");
+console.log(filesDistinct.sort());
+
 console.log("\n===== LIST OF COMMIT WITH CONTAINS '" + messageFilter + "'  ================ \n\n");
 filterdCommits.forEach(c => {
-    console.log([c.hash,c.authorDate, c.commitDate].join(" "));
+    console.log([c.hash, c.authorDate, c.commitDate].join(" "));
 });
