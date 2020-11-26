@@ -52,7 +52,6 @@ console.log("\nCopy a past the list in filter box of trello to see the complete 
 
 var filesDistinct = [];
 filterdCommits.reduce((filesDistinct, commit) => {
-    console.log(commit.files);
     committedFiles = commit.files;
     committedFiles.forEach(f => {
         if (!filesDistinct.includes(f)) {
