@@ -7,20 +7,9 @@ const options = {
     repo: "",
     number: 5000,
     fields: ["subject", "hash", "authorDate", "committerDate"],
-    /*
-    execOptions: { maxBuffer: 10000 * 1024 },
-    */
 };
 
 
-/*
-if (argv._.length > 0) {
-    console.log("try: \nnode index.js <path-of-git-repo> PH 2020-01-01\n");
-    console.log("for extract card Id in commit message after '2020-01-01' with message which contains 'PH' from git repository in <path-of-git-repo>\n");
-
-    process.exit();
-}
-*/
 options.repo = argv.repo;
 options.after = argv.after;
 
@@ -29,11 +18,12 @@ console.log(options);
 
 const commits = gitlog(options);
 const messageFilter = argv.messageFilter;
-const hash = argv.hash;
+const grepId = new RegExp(argv.grepExpression) ?? /#(\d*)/;
 
 var cardIdDistinct = [];
-var filterdCommits = commits.filter(commit => commit.subject.includes(messageFilter));
-const grepId = /\[(\d*)\]/;
+var filterdCommits = commits;
+if (!!messageFilter) filterdCommits = commits.filter(commit => commit.subject.includes(messageFilter));
+
 filterdCommits.reduce((cardIdList, commit) => {
     const parseId = grepId.exec(commit.subject);
     if (parseId != null) {

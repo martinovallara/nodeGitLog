@@ -9,7 +9,7 @@ The card ID must be present in the commit message in this form: ```[ID]: ex [132
 *a series of numeric characters enclosed in square brackets*
 
 usage (after git clone):
-    node index.js --repo ~/Repositories/../xyp-project --messageFilter PH  --after 2020-11-04
+    node index.js --repo ~/Repositories/../xyp-project --messageFilter PH --grepExpression "#(\d*)" --after 2020-11-04
     
 for extract card Id in commit message after '2020-01-01' with message which contains 'PH' from git repo in ~/Repositories/../xyp-project
 
